@@ -34,8 +34,8 @@ logger = logging.getLogger(__name__)
 # KONFIGURATSIYA
 # ============================================================================
 
-BOT_TOKEN = os.getenv("BOT_TOKEN", "YOUR_BOT_TOKEN_HERE")
-WEB_APP_URL = os.getenv("WEB_APP_URL", "https://YOUR_DEPLOYED_APP.vercel.app")
+BOT_TOKEN = os.getenv("7771805386:AAHFLwyQLXQjNOpfTa5iBcEbG4ZwusNzQyM", "YOUR_BOT_TOKEN_HERE")
+WEB_APP_URL = os.getenv("https://telegram-bot-seven-cyan-94.vercel.app/", "https://YOUR_DEPLOYED_APP.vercel.app")
 
 # E-agar local'da test qilmoqchi bo'lsangiz:
 # WEB_APP_URL = "http://localhost:8000/index.html"  # Local
@@ -135,12 +135,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # Keyboard
     keyboard = [
         [InlineKeyboardButton(
-            "🎮 Hunter System Ochish",
+            "🎮 Hunter Tizimini Ochish",
             web_app=WebAppInfo(url=WEB_APP_URL)
         )],
         [
             InlineKeyboardButton("📊 Statistika", callback_data="stats"),
-            InlineKeyboardButton("🏆 Ranking", callback_data="ranking")
+            InlineKeyboardButton("🏆 Reyting", callback_data="ranking")
         ],
         [
             InlineKeyboardButton("❓ Yordam", callback_data="help"),
@@ -150,26 +150,26 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     reply_markup = InlineKeyboardMarkup(keyboard)
     
     welcome_text = f"""
-🗡️ <b>HUNTER SYSTEM'ga xush kelibsiz!</b>
+🗡️ <b>HUNTER TIZIMIGA XO'SH KELIBSIZ!</b>
 
-Salom, <b>{user.first_name}</b>! 👋
+Assalomu alaykum, <b>{user.first_name}</b>! 👋
 
-Bu bot sizning kunlik quest'laringiz va skill rivojlanishingizni Solo Leveling uslubida kuzatadi.
+Bu bot sizning kunlik vazifalaringiz va ko'nikmalaringiz rivojlanishini Solo Leveling uslubida kuzatadi.
 
 <b>Qanday ishlaydi:</b>
 ✓ Kunlik vazifalar qo'shing
-✓ Focus time hisoblang
+✓ Diqqat vaqtini hisoblang
 ✓ XP yig'ing
-✓ Rankingizni ko'taring
-✓ Skill'laringizni o'zlashtiring
+✓ Reytingingizni ko'taring
+✓ Ko'nikmalaringizni o'zlashtiring
 
-<b>Bugingi Statistika:</b>
-├ Level: {(user_data['total_xp'] // 50) + 1}
+<b>Bugungi Statistika:</b>
+├ Daraja: {(user_data['total_xp'] // 50) + 1}
 ├ XP: {user_data['total_xp']} 
 ├ Bugun XP: {user_data['daily_xp']}
-└ Streak: {user_data['streak']} kunlik
+└ Seriya: {user_data['streak']} kunlik
 
-<b>👉 "🎮 Hunter System Ochish" tugmasini bosing va boshlang!</b>
+<b>👉 "🎮 Hunter Tizimini Ochish" tugmasini bosing va boshlang!</b>
 """
     
     await update.message.reply_text(
@@ -181,50 +181,50 @@ Bu bot sizning kunlik quest'laringiz va skill rivojlanishingizni Solo Leveling u
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """/help - Yordam"""
     help_text = """
-🗡️ <b>HUNTER SYSTEM - YORDAM</b>
+🗡️ <b>HUNTER TIZIMI - YORDAM</b>
 
 <b>Asosiy Tushunchalar:</b>
 
-📌 <b>DAILY QUESTS</b>
-→ Har kun yangi vazifalar qo'shish
+📌 <b>KUNLIK VAZIFALAR</b>
+→ Har kun yangi vazifalar qo'shing
 → Har bir vazifa = +10 XP
-→ Timer bilan vaqt hisoblaymiz
-→ Timer XP = vaqt / 40 daqiqa
+→ Taymer bilan vaqt hisoblang
+→ Taymer XP = vaqt / 40 daqiqa
 
-📌 <b>ONGOING MISSIONS</b>
+📌 <b>DAVOM ETAYOTGAN MISSIYALAR</b>
 → Uzoq muddatli maqsadlar (1-7 kun)
-→ Deadline va progress (0-100%)
+→ Muddat va jarayon (0-100%)
 → Tugallash = +25 XP
 
-📌 <b>SKILL TRACKING</b>
-→ Kodlaш, English, o'qish va h.k.
-→ Har "TRAIN" = +5 XP
-→ Growth trend ko'ring (↑ ↓ →)
+📌 <b>KO'NIKMA KUZATUVI</b>
+→ Dasturlash, Inglizcha, o'qish va h.k.
+→ Har "MASHQ" = +5 XP
+→ O'sish tendensiyasini ko'ring (↑ ↓ →)
 
-📌 <b>RANKING SISTEMA</b>
-🟪 E-Rank: 0-99 XP
-🟦 D-Rank: 100-299 XP
-🟧 C-Rank: 300-699 XP
-🟨 B-Rank: 700-1499 XP
-🔴 A-Rank: 1500-2999 XP
-⭐ S-Rank: 3000-4999 XP
-👑 National: 5000+ XP
+📌 <b>REYTING TIZIMI</b>
+🟪 E-Daraja: 0-99 XP
+🟦 D-Daraja: 100-299 XP
+🟧 C-Daraja: 300-699 XP
+🟨 B-Daraja: 700-1499 XP
+🔴 A-Daraja: 1500-2999 XP
+⭐ S-Daraja: 3000-4999 XP
+👑 Milliy: 5000+ XP
 
-<b>Kunlik Rutin:</b>
-1️⃣ App'ni oching
-2️⃣ 3-5 ta vazifani qo'shing
-3️⃣ Timer bilan bajaramiz
-4️⃣ Done qilib XP olamiz
-5️⃣ Oqshomda skill training
-6️⃣ Streakni kesmaymiz
+<b>Kunlik Tartib:</b>
+1️⃣ Ilovani oching
+2️⃣ 3-5 ta vazifa qo'shing
+3️⃣ Taymer bilan bajaring
+4️⃣ Bajarildi deb belgilab XP oling
+5️⃣ Kechqurun ko'nikma mashqi
+6️⃣ Seriyani uzmaymiz
 
 <b>Maslahat:</b>
-💡 Har kun bitta QUEST = 7 XP min
-💡 Haftalik streak = motivatsiya
-💡 Focus time distractions'dan kuzat
-💡 Skills regulyar o'zlashitiring
+💡 Har kun bitta VAZIFA = kamida 7 XP
+💡 Haftalik seriya = motivatsiya
+💡 Chalg'ituvchilarni kuzating
+💡 Ko'nikmalarni muntazam o'zlashtiring
 
-🎮 <b>App'ni ochish uchun /start bosing</b>
+🎮 <b>Ilovani ochish uchun /start bosing</b>
 """
     
     await update.message.reply_text(
@@ -257,30 +257,30 @@ async def stats_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     stats_text = f"""
 📊 <b>STATISTIKA - {query.from_user.first_name}</b>
 
-<b>Current Rank:</b>
+<b>Joriy Daraja:</b>
 {rank_info['current']['emoji']} <b>{rank_info['current']['name']}</b>
 
-<b>XP Progress:</b>
+<b>XP Jarayoni:</b>
 {bar} {int(pct)}%
 {rank_info['progress']} / {rank_info['needed']} XP
 
-<b>Level & XP:</b>
-├ Level: <code>{level}</code>
-├ Total XP: <code>{user_data['total_xp']}</code>
-├ Today XP: <code>{user_data['daily_xp']}</code>
-└ Streak: <code>{user_data['streak']} days</code>
+<b>Daraja va XP:</b>
+├ Daraja: <code>{level}</code>
+├ Jami XP: <code>{user_data['total_xp']}</code>
+├ Bugun XP: <code>{user_data['daily_xp']}</code>
+└ Seriya: <code>{user_data['streak']} kun</code>
 
-<b>Achievements:</b>
-├ Quests Done: {user_data['completed_quests']}
-├ Total Focus: {user_data['stats']['total_focus_time'] // 3600}h {(user_data['stats']['total_focus_time'] % 3600) // 60}m
-└ Avg Daily XP: {user_data['stats']['avg_daily_xp']}
+<b>Yutuqlar:</b>
+├ Bajarilgan Vazifalar: {user_data['completed_quests']}
+├ Jami Diqqat Vaqti: {user_data['stats']['total_focus_time'] // 3600}s {(user_data['stats']['total_focus_time'] % 3600) // 60}d
+└ O'rtacha Kunlik XP: {user_data['stats']['avg_daily_xp']}
 
-<b>Next Rank:</b>
+<b>Keyingi Daraja:</b>
 {rank_info['next']['emoji']} {rank_info['next']['name']} 
 ({rank_info['needed']} XP kerak)
 """
     
-    keyboard = [[InlineKeyboardButton("← Orqaga", callback_data="back_menu")]]
+    keyboard = [[InlineKeyboardButton("← Orqaga qaytish", callback_data="back_menu")]]
     await query.edit_message_text(
         stats_text,
         reply_markup=InlineKeyboardMarkup(keyboard),
@@ -296,7 +296,7 @@ async def ranking_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     user_data = load_user_data(user_id)
     current_rank = get_user_rank(user_data["total_xp"])["current"]
     
-    ranking_text = "<b>🏆 RANKING SISTEMA</b>\n\n"
+    ranking_text = "<b>🏆 REYTING TIZIMI</b>\n\n"
     
     for i, rank in enumerate(RANKS):
         is_current = rank == current_rank
@@ -306,13 +306,13 @@ async def ranking_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -
         ranking_text += f"{marker}{rank['emoji']} <b>{rank['name']}</b>\n"
         ranking_text += f"   {rank['min_xp']} - {next_xp} XP\n\n"
     
-    ranking_text += "\n<b>Maqsad:</b>\n"
-    ranking_text += "E-Rank: 1 hafta\n"
-    ranking_text += "D-Rank: 2 hafta\n"
-    ranking_text += "C-Rank: 3-4 hafta\n"
-    ranking_text += "B-Rank: 1-2 oy\n"
-    ranking_text += "S-Rank: 2-3 oy\n"
-    ranking_text += "National: 3-6 oy\n"
+    ranking_text += "\n<b>Taxminiy Maqsad:</b>\n"
+    ranking_text += "E-Daraja: 1 hafta\n"
+    ranking_text += "D-Daraja: 2 hafta\n"
+    ranking_text += "C-Daraja: 3-4 hafta\n"
+    ranking_text += "B-Daraja: 1-2 oy\n"
+    ranking_text += "S-Daraja: 2-3 oy\n"
+    ranking_text += "Milliy: 3-6 oy\n"
     
     keyboard = [[InlineKeyboardButton("← Orqaga", callback_data="back_menu")]]
     await query.edit_message_text(
@@ -329,43 +329,43 @@ async def help_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     help_text = """
 <b>❓ QANDAY ISHLAYDI</b>
 
-<b>1. DAILY QUESTS</b>
-App'da "Daily Quests" tabiga o'ting:
+<b>1. KUNLIK VAZIFALAR</b>
+Ilovada "Kunlik Vazifalar" yorlig'iga o'ting:
 • Yangi vazifa yozing
-• ⏱️ Timer bosing (ishga tushadi)
-• Vazifani bajarasiz
-• ✓ Checkbox bosing (Done)
-→ Har quest = +10 XP + timer XP
+• ⏱️ Taymerni bosing (ishga tushadi)
+• Vazifani bajaring
+• ✓ Belgi bosing (Bajarildi)
+→ Har vazifa = +10 XP + taymer XP
 
-<b>2. ONGOING MISSIONS</b>
-"Ongoing" tabiga o'ting:
-• Mission nomi yozing
-• Deadline belgilang
-• Kategoriya tanlang
-• Har kun progress yangilang
+<b>2. DAVOM ETAYOTGAN MISSIYALAR</b>
+"Missiyalar" yorlig'iga o'ting:
+• Missiya nomini yozing
+• Muddatini belgilang
+• Toifasini tanlang
+• Har kun jarayonni yangilang
 → Tugallash = +25 XP
 
-<b>3. SKILLS</b>
-"Analysis" → "Skill Growth":
-• Skill nomini yozing
-• Har kun "TRAIN" bosing
-→ Har TRAIN = +5 XP
-→ Growth trend ko'ring
+<b>3. KO'NIKMALAR</b>
+"Tahlil" → "Ko'nikma O'sishi":
+• Ko'nikma nomini yozing
+• Har kun "MASHQ" bosing
+→ Har MASHQ = +5 XP
+→ O'sish tendensiyasini ko'ring
 
-<b>4. FOCUS ANALYSIS</b>
-"Analysis" → "Focus Drains":
+<b>4. DIQQAT TAHLILI</b>
+"Tahlil" → "Chalg'ituvchilar":
 • Instagram, TikTok va h.k.
-• +15m bosib vaqt qo'shing
+• +15 daqiqa bosib vaqt qo'shing
 → Chalg'ituvchilarni kuzating
 
-<b>XP Hisob:</b>
-✓ Daily quest = +10 XP
-✓ Focus time = +1 XP (40 min)
-✓ Ongoing done = +25 XP
-✓ Skill train = +5 XP
-✓ Distraction log = -motivatsiya
+<b>XP Hisob-kitobi:</b>
+✓ Kunlik vazifa = +10 XP
+✓ Diqqat vaqti = +1 XP (40 daq)
+✓ Missiya tugallash = +25 XP
+✓ Ko'nikma mashqi = +5 XP
+✓ Chalg'ituvchi = -motivatsiya
 
-👉 Batafsil: /help
+👉 Batafsil: /yordam
 """
     
     keyboard = [[InlineKeyboardButton("← Orqaga", callback_data="back_menu")]]
@@ -386,29 +386,29 @@ async def settings_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     settings_text = f"""
 ⚙️ <b>SOZLAMALAR</b>
 
-<b>User Info:</b>
+<b>Foydalanuvchi Ma'lumoti:</b>
 ID: <code>{user_id}</code>
-Name: {query.from_user.first_name}
-Joined: {user_data['last_reset']}
+Ism: {query.from_user.first_name}
+Qo'shilgan: {user_data['last_reset']}
 
-<b>Notification Settings:</b>
-🔔 Reminders: <code>OFF</code> (Free bot)
-📊 Daily Report: <code>OFF</code> (Free bot)
-⏰ Streak Alert: <code>OFF</code> (Free bot)
+<b>Bildirishnoma Sozlamalari:</b>
+🔔 Eslatmalar: <code>O'CHI</code> (Bepul bot)
+📊 Kunlik Hisobot: <code>O'CHI</code> (Bepul bot)
+⏰ Seriya Ogohlantirish: <code>O'CHI</code> (Bepul bot)
 
-<b>Data:</b>
-💾 Backup: <code>Avtomatik</code>
-📁 Storage: <code>Local JSON</code>
-🔒 Privacy: <code>100% Private</code>
+<b>Ma'lumotlar:</b>
+💾 Zaxira: <code>Avtomatik</code>
+📁 Saqlash: <code>Mahalliy JSON</code>
+🔒 Maxfiylik: <code>100% Shaxsiy</code>
 
-<b>Malumot:</b>
-• Barcha ma'lumotlar local JSON faylda
-• Telefon o'chirilsa ham saqlandi
-• Cloud'ga yuklash istagan bo'lsa - /cloudbackup
-• Reset qilmoqchi? - /reset
+<b>Eslatma:</b>
+• Barcha ma'lumotlar mahalliy JSON faylda saqlanadi
+• Telefon o'chirilsa ham saqlanadi
+• Bulutga yuklash uchun - /cloudbackup
+• Tozalash uchun? - /reset
 
-<b>Version:</b> v1.0.0 (Free)
-<b>Support:</b> @yourbot
+<b>Versiya:</b> v1.0.0 (Bepul)
+<b>Yordam:</b> @yourbot
 """
     
     keyboard = [[InlineKeyboardButton("← Orqaga", callback_data="back_menu")]]
@@ -425,12 +425,12 @@ async def back_menu_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
     
     keyboard = [
         [InlineKeyboardButton(
-            "🎮 Hunter System Ochish",
+            "🎮 Hunter Tizimini Ochish",
             web_app=WebAppInfo(url=WEB_APP_URL)
         )],
         [
             InlineKeyboardButton("📊 Statistika", callback_data="stats"),
-            InlineKeyboardButton("🏆 Ranking", callback_data="ranking")
+            InlineKeyboardButton("🏆 Reyting", callback_data="ranking")
         ],
         [
             InlineKeyboardButton("❓ Yordam", callback_data="help"),
@@ -439,10 +439,10 @@ async def back_menu_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
     ]
     
     menu_text = """
-🗡️ <b>MAIN MENU</b>
+🗡️ <b>ASOSIY MENYU</b>
 
-🎮 Hunter System ochish uchun birinchi tugmani bosing
-📊 Sizning statistikangizni ko'rish uchun tugmalarni ishlating
+🎮 Hunter Tizimini ochish uchun birinchi tugmani bosing
+📊 Statistikangizni ko'rish uchun tugmalardan foydalaning
 """
     
     await query.edit_message_text(
@@ -466,14 +466,14 @@ async def status_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     level = (user_data["total_xp"] // 50) + 1
     
     status = f"""
-⚡ <b>QUICK STATUS</b>
+⚡ <b>TEZKOR HOLAT</b>
 
 {rank['emoji']} <b>{rank['name']}</b>
-Level {level} | {user_data['total_xp']} XP
-Today: +{user_data['daily_xp']} XP
-Streak: {user_data['streak']} 🔥
+Daraja {level} | {user_data['total_xp']} XP
+Bugun: +{user_data['daily_xp']} XP
+Seriya: {user_data['streak']} 🔥
 
-👉 /start bosib app'ni oching
+👉 /start bosib ilovani oching
 """
     
     await update.message.reply_text(status, parse_mode=ParseMode.HTML)
@@ -490,9 +490,9 @@ async def reset_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     ]
     
     await update.message.reply_text(
-        "⚠️ <b>EHTIYOT!</b>\n\n"
+        "⚠️ <b>DIQQAT!</b>\n\n"
         "Barcha ma'lumotlaringizni o'chirishni xohlaysizmi?\n"
-        "Bu amalni qaytarib bo'lmaydi! ❌",
+        "Bu amalni ortga qaytarib bo'lmaydi! ❌",
         reply_markup=InlineKeyboardMarkup(keyboard),
         parse_mode=ParseMode.HTML
     )
@@ -519,13 +519,13 @@ async def confirm_reset_callback(update: Update, context: ContextTypes.DEFAULT_T
     save_user_data(user_id, user_data)
     
     await query.answer("Ma'lumotlar o'chirildi!")
-    await query.edit_message_text("✅ <b>Barcha ma'lumotlar o'chirildi</b>\n\n/start bosing boshlash uchun")
+    await query.edit_message_text("✅ <b>Barcha ma'lumotlar o'chirildi</b>\n\nBoshlash uchun /start bosing")
 
 async def cancel_reset_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Reset bekor qilish"""
     query = update.callback_query
-    await query.answer("Reset bekor qilindi")
-    await query.edit_message_text("❌ Reset bekor qilindi\n\n/start bosing davom etish uchun")
+    await query.answer("Bekor qilindi")
+    await query.edit_message_text("❌ Tozalash bekor qilindi\n\nDavom etish uchun /start bosing")
 
 # ============================================================================
 # ERROR HANDLER
@@ -538,8 +538,8 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     if isinstance(update, Update) and update.effective_message:
         try:
             await update.effective_message.reply_text(
-                "❌ Xato yuz berdi!\n\n"
-                "Iltimos /start bosing yoki biroz vaqt o'tib qayta urinib ko'ring"
+                "❌ Xatolik yuz berdi!\n\n"
+                "Iltimos /start bosing yoki biroz vaqt o'tib qayta urinib ko'ring."
             )
         except Exception as e:
             logger.error(f"Failed to send error message: {e}")
@@ -572,18 +572,18 @@ def main() -> None:
     # Error handler
     application.add_error_handler(error_handler)
     
-    # Bot commands (menu ko'rinish)
+    # Bot commands (menyu ko'rinishi)
     commands = [
-        BotCommand("start", "🎮 Hunter System ni ochish"),
-        BotCommand("status", "⚡ Qisqa status"),
+        BotCommand("start", "🎮 Hunter Tizimini ochish"),
+        BotCommand("status", "⚡ Tezkor holat"),
         BotCommand("help", "❓ Yordam va qo'llanma"),
         BotCommand("reset", "⚠️ Barcha ma'lumotlarni o'chirish"),
     ]
     
-    # Run
-    logger.info("🗡️ Hunter System Bot ishga tushdi!")
-    logger.info(f"Web App URL: {WEB_APP_URL}")
-    logger.info(f"Data file: {DATA_FILE}")
+    # Ishga tushirish
+    logger.info("🗡️ Hunter Tizimi Boti ishga tushdi!")
+    logger.info(f"Veb-ilova URL: {WEB_APP_URL}")
+    logger.info(f"Ma'lumotlar fayli: {DATA_FILE}")
     
     # Polling ishga tushar
     application.run_polling(allowed_updates=Update.ALL_TYPES)
